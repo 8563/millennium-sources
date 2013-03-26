@@ -1,0 +1,20 @@
+--- mm/swapfile.c	2013-03-03 21:41:13.439329985 +1100
++++ mm/swapfile.c	2013-03-03 21:42:49.106133986 +1100
+@@ -380,7 +380,7 @@
+ 			spin_lock(&swap_lock);
+ 			goto checks;
+ 		}
+-		if (vm_swap_full() && si->swap_map[offset] == SWAP_HAS_CACHE) {
++		if (si->swap_map[offset] == SWAP_HAS_CACHE) {
+ 			spin_lock(&swap_lock);
+ 			goto checks;
+ 		}
+@@ -395,7 +395,7 @@
+ 			spin_lock(&swap_lock);
+ 			goto checks;
+ 		}
+-		if (vm_swap_full() && si->swap_map[offset] == SWAP_HAS_CACHE) {
++		if (si->swap_map[offset] == SWAP_HAS_CACHE) {
+ 			spin_lock(&swap_lock);
+ 			goto checks;
+ 		}

@@ -1,0 +1,44 @@
+--- init/Kconfig	2013-03-03 21:41:14.179320734 +1100
++++ init/Kconfig	2013-03-03 21:42:37.571278191 +1100
+@@ -32,6 +32,19 @@
+ 
+ menu "General setup"
+ 
++config SCHED_BFS
++	bool "BFS cpu scheduler"
++	---help---
++	  The Brain Fuck CPU Scheduler for excellent interactivity and
++	  responsiveness on the desktop and solid scalability on normal
++          hardware. Not recommended for 4096 CPUs.
++
++	  Currently incompatible with the Group CPU scheduler, and RCU TORTURE
++          TEST so these options are disabled.
++
++          Say Y here.
++	default y
++
+ config EXPERIMENTAL
+ 	bool "Prompt for development and/or incomplete code/drivers"
+ 	---help---
+@@ -353,19 +366,11 @@
+ 	  small performance impact.  In the case of s390 or IBM POWER > 5,
+ 	  this also enables accounting of stolen time on logically-partitioned
+ 	  systems.
++endchoice
+ 
+ config IRQ_TIME_ACCOUNTING
+-	bool "Fine granularity task level IRQ time accounting"
+-	depends on HAVE_IRQ_TIME_ACCOUNTING
+-	help
+-	  Select this option to enable fine granularity task irq time
+-	  accounting. This is done by reading a timestamp on each
+-	  transitions between softirq and hardirq state, so there can be a
+-	  small performance impact.
+-
+-	  If in doubt, say N here.
++	def_bool y
+ 
+-endchoice
+ 
+ config BSD_PROCESS_ACCT
+ 	bool "BSD Process Accounting"

@@ -1,0 +1,11 @@
+--- include/linux/swap.h	2013-03-03 21:41:13.439329985 +1100
++++ include/linux/swap.h	2013-03-03 21:42:49.103134023 +1100
+@@ -209,7 +209,7 @@
+ 	int next;	/* swapfile to be used next */
+ };
+ 
+-/* Swap 50% full? Release swapcache more aggressively.. */
++/* Swap 50% full? */
+ #define vm_swap_full() (nr_swap_pages*2 < total_swap_pages)
+ 
+ /* linux/mm/page_alloc.c */

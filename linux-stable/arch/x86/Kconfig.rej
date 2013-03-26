@@ -1,0 +1,11 @@
+--- arch/x86/Kconfig	2013-03-03 21:41:12.927336386 +1100
++++ arch/x86/Kconfig	2013-03-03 21:42:50.501116546 +1100
+@@ -1108,7 +1108,7 @@
+ 
+ choice
+ 	depends on EXPERIMENTAL
+-	prompt "Memory split" if EXPERT
++	prompt "Memory split"
+ 	default VMSPLIT_3G
+ 	depends on X86_32
+ 	---help---

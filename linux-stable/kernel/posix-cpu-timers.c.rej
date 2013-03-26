@@ -1,0 +1,33 @@
+--- kernel/posix-cpu-timers.c	2013-03-03 21:41:14.179320734 +1100
++++ kernel/posix-cpu-timers.c	2013-03-03 21:42:37.575278141 +1100
+@@ -471,10 +471,10 @@
+  */
+ void posix_cpu_timers_exit(struct task_struct *tsk)
+ {
+-	add_device_randomness((const void*) &tsk->se.sum_exec_runtime,
++	add_device_randomness((const void*) &tsk_seruntime(tsk),
+ 						sizeof(unsigned long long));
+ 	cleanup_timers(tsk->cpu_timers,
+-		       tsk->utime, tsk->stime, tsk->se.sum_exec_runtime);
++		       tsk->utime, tsk->stime, tsk_seruntime(tsk));
+ 
+ }
+ void posix_cpu_timers_exit_group(struct task_struct *tsk)
+@@ -483,7 +483,7 @@
+ 
+ 	cleanup_timers(tsk->signal->cpu_timers,
+ 		       tsk->utime + sig->utime, tsk->stime + sig->stime,
+-		       tsk->se.sum_exec_runtime + sig->sum_sched_runtime);
++		       tsk_seruntime(tsk) + sig->sum_sched_runtime);
+ }
+ 
+ static void clear_dead_task(struct k_itimer *timer, union cpu_time_count now)
+@@ -1231,7 +1231,7 @@
+ 		struct task_cputime task_sample = {
+ 			.utime = tsk->utime,
+ 			.stime = tsk->stime,
+-			.sum_exec_runtime = tsk->se.sum_exec_runtime
++			.sum_exec_runtime = tsk_seruntime(tsk)
+ 		};
+ 
+ 		if (task_cputime_expired(&task_sample, &tsk->cputime_expires))
